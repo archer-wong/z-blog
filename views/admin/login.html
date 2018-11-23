@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Standard Meta -->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="/public/semantic/dist/semantic.min.css">
+
+    <style type="text/css">
+        body {
+            background-color: #DADADA;
+        }
+        body > .grid {
+            height: 100%;
+        }
+        .image {
+            margin-top: -100px;
+        }
+        .column {
+            max-width: 450px;
+        }
+    </style>
+</head>
+<body cz-shortcut-listen="true">
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            <h2 class="ui teal image header">
+                <img src="/public/image/logo.png" class="image">
+                <div class="content">
+                    欢迎使用Z-BLOG
+                </div>
+            </h2>
+            <form class="ui large form" method="post" action="{{URL `admin.do-login`}}">
+                <div class="ui stacked segment">
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="text" name="username" placeholder="请输入账号">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui left icon input">
+                            <i class="lock icon"></i>
+                            <input type="password" name="password" placeholder="请输入密码">
+                        </div>
+                    </div>
+                    {{ if .Flash.ErrorMsg }}
+                        <div class="fields">
+                            <div class="twelve wide field">
+                                <div class="ui left icon input">
+                                    <i class="shield alternate"></i>
+                                    <input type="password" name="captcha" placeholder="请输入验证码">
+                                </div>
+                            </div>
+                            <div class="four wide field">
+                                {{.Captcha.CreateHtml}}
+                            </div>
+                        </div>
+                    {{ end }}
+                    <div class="ui fluid large teal submit button">登录</div>
+                </div>
+                <div class="ui error message">
+                    {{ if .Flash.ErrorMsg }}
+                        <ul class="list">
+                            <li>{{.Flash.ErrorMsg}}</li>
+                        </ul>
+                    {{ end }}
+                </div>
+
+            </form>
+
+            <div class="ui message" style="display:none">
+                New to us? <a href="#">注册</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="/public/js/jquery.min.js"></script>
+<script src="/public/semantic/dist/semantic.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.ui.form').form({
+            fields: {
+                email: {
+                    identifier  : 'username',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : '请输入用户名'
+                        }
+                    ]
+                },
+                password: {
+                    identifier  : 'password',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : '请输入密码'
+                        },
+                        {
+                            type   : 'length[6]',
+                            prompt : '密码不能小于六位'
+                        }
+                    ]
+                }
+            }
+        })
+    })
+</script>
+</html>

@@ -11,11 +11,78 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:2e2b2c8b2803b8d62aa8eb58285de5e7039ae603999f70bfe6ffc83a6779aa0c"
+  name = "github.com/go-macaron/cache"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "56173531277692bc2925924d51fda1cd0a6b8178"
+
+[[projects]]
+  branch = "master"
+  digest = "1:2c2632868a3986356218d0c0d2fab19b81fb69298cf9cea90312906b0971d055"
+  name = "github.com/go-macaron/captcha"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "d2857f392769a265d5de1aea9dc5d9d63f502416"
+
+[[projects]]
+  branch = "master"
+  digest = "1:37a1ebadf135c1546f9d7580c8a9846bfdc200e7cffa438d5a03fb442f5c3d82"
+  name = "github.com/go-macaron/gzip"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "cad1c6580a07c56f5f6bc52d66002a05985c5854"
+
+[[projects]]
+  branch = "master"
   digest = "1:bdb17865b13e720add16eaa212872b4306c8521f367c7a7ff2c10cef1e7afdb1"
   name = "github.com/go-macaron/inject"
   packages = ["."]
   pruneopts = "UT"
   revision = "d8a0b8677191f4380287cfebd08e462217bac7ad"
+
+[[projects]]
+  branch = "master"
+  digest = "1:4a271dacf7b6e19bcdfafeaedad359b34396826abfb5c646c0a2da4b15f98614"
+  name = "github.com/go-macaron/session"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "068d408f9c54c7fa7fcc5e2bdd3241ab21280c9e"
+
+[[projects]]
+  digest = "1:235ae01f32fb5f12c5f6d2e0e05ab48e651ab31c126e45a4efc4f510810941ac"
+  name = "github.com/jinzhu/gorm"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "6ed508ec6a4ecb3531899a69cbc746ccf65a4166"
+  version = "v1.9.1"
+
+[[projects]]
+  branch = "master"
+  digest = "1:fd97437fbb6b7dce04132cf06775bd258cce305c44add58eb55ca86c6c325160"
+  name = "github.com/jinzhu/inflection"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "04140366298a54a039076d798123ffa108fff46c"
+
+[[projects]]
+  digest = "1:86de9e2843223d09dd84522f466368b33b5c8541e0d3075d4a28e5a80dd14f5c"
+  name = "github.com/klauspost/compress"
+  packages = [
+    "flate",
+    "gzip",
+  ]
+  pruneopts = "UT"
+  revision = "30be6041bed523c18e269a700ebd9c2ea9328574"
+  version = "v1.4.1"
+
+[[projects]]
+  digest = "1:2d643962fac133904694fffa959bc3c5dcfdcee38c6f5ffdd99a3c93eb9c835c"
+  name = "github.com/klauspost/cpuid"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "e7e905edc00ea8827e58662220139109efea09db"
+  version = "v1.2.0"
 
 [[projects]]
   branch = "master"
@@ -34,7 +101,7 @@
   version = "v1.39.0"
 
 [[projects]]
-  digest = "1:2b9d0210e4b76b44216180f37b47cc145827ee628e788cea142483eb958a2b9d"
+  digest = "1:3bc951afa0b1057c3a9523b60134af5be699ffbd3754e06a139739b33610ac2f"
   name = "gopkg.in/macaron.v1"
   packages = ["."]
   pruneopts = "UT"
@@ -44,6 +111,14 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = ["gopkg.in/macaron.v1"]
+  input-imports = [
+    "github.com/go-macaron/cache",
+    "github.com/go-macaron/captcha",
+    "github.com/go-macaron/gzip",
+    "github.com/go-macaron/session",
+    "github.com/jinzhu/gorm",
+    "gopkg.in/ini.v1",
+    "gopkg.in/macaron.v1",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -1,0 +1,91 @@
+body { font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif; color: #555; background: #efefef; line-height: 1.5; }
+
+/*header*/
+.header {
+    width: 100%;
+    background: #fff;
+    overflow: hidden;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+.header .logo {
+    text-align: center;
+    font-size: 22px;
+    padding: 20px 0
+}
+
+.header .menu {
+    width: 1000px;
+    margin: 0 auto 20px !important;
+    border:none;
+    border-bottom: #000 2px solid;
+    border-top: #000 2px solid;
+    border-radius:0;
+}
+.main-container{
+    width: 1000px;
+    min-height:500px;
+    margin: auto;
+    overflow: hidden;
+    clear: both;
+    background:#efefef;
+}
+
+.main-box{
+    margin-top:20px !important;
+    background:#efefef;
+}
+
+.left-main{
+    background:#efefef;
+}
+
+.bloglist {
+    background: #FFF;
+    overflow: hidden;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.bloglist h2 {
+    font-size: 18px;
+    position: relative
+}
+.bloglist h2:before {
+    content: "";
+    width: 3px;
+    height: 26px;
+    position: absolute;
+    left: -20px;
+    top: 0;
+    background: #333
+}
+.bloglist p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-height: 24px;
+    height: 72px;
+    margin: 10px 0 0
+}
+
+.right-main{
+    background:#efefef;
+}
+.right-list-box{
+    background:#FFF;
+    margin-bottom:20px;
+    padding:10px;
+}
+
+.footer {
+    width: 100%;
+    text-align: center;
+    background: #FFF;
+    padding: 10px 0;
+    line-height: 26px;
+    border-top: #333 1px solid;
+}
+

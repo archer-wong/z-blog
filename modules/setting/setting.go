@@ -16,7 +16,7 @@ func init() {
 	iniPath := "conf/app.ini"
 	envExist := PathExist("conf/app.ini.env")
 	if envExist {
-		iniPath = "app.ini.env"
+		iniPath = "conf/app.ini.env"
 	}
 
 	sources := []interface{}{iniPath}

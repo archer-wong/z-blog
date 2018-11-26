@@ -35,7 +35,7 @@
                     欢迎使用Z-BLOG
                 </div>
             </h2>
-            <form class="ui large form" method="post" action="{{URL `admin.do-login`}}">
+            <form class="ui large form login" method="post" action="{{URL `admin.do-login`}}">
                 <div class="ui stacked segment">
                     <div class="field">
                         <div class="ui left icon input">
@@ -65,11 +65,6 @@
                     <div class="ui fluid large teal submit button">登录</div>
                 </div>
                 <div class="ui error message">
-                    {{ if .Flash.ErrorMsg }}
-                        <ul class="list">
-                            <li>{{.Flash.ErrorMsg}}</li>
-                        </ul>
-                    {{ end }}
                 </div>
 
             </form>
@@ -112,6 +107,14 @@
                 }
             }
         })
+
+        var flashError = "{{ .Flash.ErrorMsg }}";
+        var errors = [];
+        console.log(111, flashError)
+        if (flashError != ""){
+            errors.push(flashError)
+            $('.ui.form.login').form('add errors', errors);
+        }
     })
 </script>
 </html>

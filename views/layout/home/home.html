@@ -1,0 +1,30 @@
+{{ define "layout.home"}}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Standard Meta -->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="/public/semantic/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/home.css">
+</head>
+<body cz-shortcut-listen="true">
+
+{{ template "home.header" .}}
+
+{{ template "home.main" .}}
+
+{{ template "home.footer" .}}
+
+</body>
+
+<script src="/public/js/jquery.min.js"></script>
+<script src="/public/semantic/dist/semantic.js"></script>
+
+</html>
+{{end}}

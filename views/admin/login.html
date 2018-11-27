@@ -110,7 +110,6 @@
 
         var flashError = "{{ .Flash.ErrorMsg }}";
         var errors = [];
-        console.log(111, flashError)
         if (flashError != ""){
             errors.push(flashError)
             $('.ui.form.login').form('add errors', errors);

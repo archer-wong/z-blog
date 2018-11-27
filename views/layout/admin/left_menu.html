@@ -1,0 +1,21 @@
+{{define "admin.left_menu"}}
+<div class="menu_box">
+    <ul>
+        <li>
+            <h3><i class="list icon"></i>内容管理</h3>
+            <ul class="sub_menu" style="display: block;">
+                <li class=""><a href="/admin/category/create"><i class="motorcycle middle aligned icon"></i>添加分类</a></li>
+                <li class="on"><a href="/admin/category"><i class="fighter jet middle aligned icon"></i>分类列表</a></li>
+                <li class=""><a href="/admin/article/create"><i class="motorcycle middle aligned icon"></i>添加文章</a></li>
+                <li class=""><a href="/admin/article"><i class="fighter jet middle aligned icon"></i>文章列表</a></li>
+            </ul>
+        </li>
+        <li>
+            <h3><i class="globe icon"></i>系统设置</h3>
+            <ul class="sub_menu" style="display: none;">
+                <li><a href="/admin/links"><i class="share alternate middle aligned icon"></i>友情链接</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+{{end}}

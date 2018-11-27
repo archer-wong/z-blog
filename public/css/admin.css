@@ -1,0 +1,135 @@
+body {
+    font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif;
+    color: #555;
+    background: #efefef;
+    line-height: 1.5;
+}
+
+/********布局********/
+.header-box {
+    border-radius:0;
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+    background: #222;
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-size: 14px;
+    color: #9d9d9d; !important;
+}
+
+.left-box{
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    padding: 0 0 50px;
+    width: 196px;
+    height: calc(100% - 40px);
+    z-index: 1024;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.right-box{
+    top: 50px;
+    left: 196px;
+    width: calc(100% - 196px);
+    height: calc(100% - 90px);
+    position: absolute;
+    background-color: #f9f9f9;
+    padding: 25px 15px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height:40px;
+    text-align: center;
+    background: #FFF;
+    padding: 10px 0;
+    line-height: 40px;
+    border-top: #333 1px solid;
+}
+/********布局完成********/
+
+.header-logo{
+    width:196px;
+    font-size:18px;
+    background:#3D3E3F !important;
+    color:#9d9d9d !important;
+}
+
+/********左侧菜单栏********/
+.menu_box ul {
+    font-size: 14px;
+    margin-top:0px;
+    padding:0px;
+}
+
+.menu_box ul li {
+    border: 1px solid #e5e5e5;
+    border-width: 1px 0;
+    list-style-type:none;
+}
+
+.menu_box ul li h3 {
+    font-size: 14px;
+    padding: 0 16px 0 18px;
+    margin-left:20px;
+    display: block;
+    height: 38px;
+    line-height: 38px;
+    color: #333;
+    cursor: pointer
+}
+
+.menu_box ul li i {
+    margin-right: 5px;
+    color: #666;
+    font-size: 14px
+}
+
+.menu_box ul li ul.sub_menu {
+    border-top: 1px solid #e5e5e5;
+    padding-left:40px;
+    background: #fff;
+    display: none
+}
+
+.menu_box ul li ul.sub_menu li {
+    padding-left: 10px
+}
+
+.menu_box ul li ul.sub_menu li a {
+    padding: 0 16px 0 20px;
+    display: block;
+    height: 38px;
+    line-height: 38px;
+    color: #333;
+    text-decoration: none
+}
+
+.menu_box ul li ul.sub_menu li a:hover {
+    color: #1963aa
+}
+
+.menu_box ul li ul.sub_menu li a:hover i {
+    color: #1963aa
+}
+
+.menu_box ul li ul.sub_menu li.on {
+    color: #1963aa
+}
+
+.menu_box ul li ul.sub_menu li.on a {
+    color: #1963aa
+}
+
+.menu_box ul li ul.sub_menu li.on a i {
+    color: #1963aa
+}
+/********左侧菜单栏完成********/
+

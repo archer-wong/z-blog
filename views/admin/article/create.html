@@ -1,0 +1,59 @@
+{{ template "admin.header" .}}
+
+<div class="main-box">
+    <div class="left-box">
+        {{ template "admin.left_menu" .}}
+    </div>
+    <div class="right-box">
+
+        {{ $breadcrumb :=  Breadcrumb "文章" "添加文章"}}
+        {{ template "admin.breadcrumb" $breadcrumb}}
+
+        {{ template "admin.message" .}}
+
+        <div class="ui container">
+            <form class="ui form" method="post" action="/admin/article">
+                <table class="ui striped celled table">
+                    <tbody>
+                        <tr>
+                            <td>分类</td>
+                            <td>
+                                <select class="ui dropdown" name="category_id">
+                                    {{ range .Categories}}
+                                        <option value="{{ .Id }}">{{ .Title }}</option>
+                                    {{end}}
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>标题</td>
+                            <td>
+                                <input type="text" name="title" placeholder="标题">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>标签</td>
+                            <td>
+                                <input type="text" name="tag" placeholder="多个标签请使用逗号分隔 eg:php,golang,js">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>内容</td>
+                            <td>
+                                <input type="text" name="content" placeholder="内容">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <button class="ui primary button">提交</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{ template "admin.footer" .}}

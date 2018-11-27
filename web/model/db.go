@@ -32,6 +32,7 @@ func init(){
 	}
 
 	Db.LogMode(true)
+	Db.AutoMigrate(new(Admin), new(Category), new(Article))
 
 	initAdmin()
 }

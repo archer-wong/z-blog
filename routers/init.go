@@ -102,6 +102,10 @@ func initTmpl() {
 				return "1.0.0"
 			},
 			"URL": m.URLFor,
+			"Breadcrumb": func(first, second string) []string {
+				values := []string{first, second}
+				return values
+			},
 		}},
 		// 模板语法分隔符，默认为 ["{{", "}}"]
 		Delims: macaron.Delims{"{{", "}}"},
@@ -112,10 +116,6 @@ func initTmpl() {
 		// 渲染具有缩进格式的 XML，默认为不缩进
 		IndentXML: true,
 		// 渲染具有前缀的 JSON，默认为无前缀
-		PrefixJSON: []byte("macaron"),
-		// 渲染具有前缀的 XML，默认为无前缀
-		PrefixXML: []byte("macaron"),
-		// 允许输出格式为 XHTML 而不是 HTML，默认为 "text/html"
 		HTMLContentType: "text/html",
 	}))
 }

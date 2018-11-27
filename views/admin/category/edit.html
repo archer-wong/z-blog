@@ -1,0 +1,37 @@
+{{ template "admin.header" .}}
+
+<div class="main-box">
+    <div class="left-box">
+    {{ template "admin.left_menu" .}}
+    </div>
+    <div class="right-box">
+        {{ $breadcrumb :=  Breadcrumb "分类" "编辑分类"}}
+        {{ template "admin.breadcrumb" $breadcrumb}}
+
+        {{ template "admin.message" .}}
+
+        <div class="ui container">
+            <form class="ui form" method="post" action="/admin/category/{{ .Category.Id }}">
+                <table class="ui striped celled table">
+                    <tbody>
+                    <tr>
+                        <td>分类名</td>
+                        <td>
+                            <input type="text" name="title" placeholder="分类名" value="{{ .Category.Title }}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button class="ui primary button">提交</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{ template "admin.footer" .}}
+

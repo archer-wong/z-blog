@@ -1,0 +1,60 @@
+{{ template "admin.header" .}}
+
+<div class="main-box">
+    <div class="left-box">
+        {{ template "admin.left_menu" .}}
+    </div>
+    <div class="right-box">
+
+        {{ $breadcrumb :=  Breadcrumb "分类" "分类列表"}}
+        {{ template "admin.breadcrumb" $breadcrumb}}
+
+        {{ template "admin.message" .}}
+
+        <div class="ui container">
+            <table class="ui striped celled table">
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Categories}}
+                        <tr>
+                            <td>{{.Title}}</td>
+                            <td>
+                                <a class="ui primary button" href="/admin/category/{{.Id}}/edit">编辑</a>
+                                <button class="ui red button" onclick="deleteItem({{ .Id }}, {{ .Title }})">删除</button>
+                            </td>
+                        </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<script>
+    function deleteItem(id, title){
+        $.ajax( {
+            type : "DELETE",
+            url : "/admin/category/" + id,
+            dataType:'json',
+            success : function(res) {
+                if(res.success){
+                    successMessage("删除分类[ " + title + " ]成功")
+                    setTimeout(function()
+                    {
+                        location.reload()
+                    }, 1000)
+
+                }else{
+                    errorMessage("删除分类[ " + title + " ]失败")
+                }
+            }
+        })
+    }
+</script>
+
+{{ template "admin.footer" .}}

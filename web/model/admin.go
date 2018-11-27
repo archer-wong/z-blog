@@ -1,9 +1,9 @@
 package model
 
 type Admin struct {
-	Id       uint   `gorm:"primary_key"`
-	Username           string
-	Password           string
+	Id         int     `gorm:"primary_key"`
+	Username   string   `gorm:not null;unique;size:15"`
+	Password   string   `gorm:not null;size:32"`
 }
 
 

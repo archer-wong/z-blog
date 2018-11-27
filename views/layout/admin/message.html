@@ -1,0 +1,45 @@
+{{define "admin.message"}}
+<div class="ui positive message" id="success_msg" style="display:none">
+</div>
+<div class="ui error message" id="error_msg" style="display:none">
+</div>
+
+<script>
+    $().ready(function() {
+        $("#success_msg").empty();
+        $("#error_msg").empty();
+
+        var flashError = "{{ .Flash.ErrorMsg }}";
+        if (flashError != ""){
+            $("#success_msg").hide();
+            $("#error_msg").append(flashError);
+            $("#error_msg").show();
+        }
+
+        var flashSuccess = "{{ .Flash.SuccessMsg }}";
+        if (flashSuccess != ""){
+            $("#error_msg").hide();
+            $("#success_msg").append(flashSuccess);
+            $("#success_msg").show();
+        }
+    })
+
+    function errorMessage(msg){
+        $("#success_msg").empty();
+        $("#error_msg").empty();
+
+        $("#success_msg").hide();
+        $("#error_msg").append(msg);
+        $("#error_msg").show();
+    }
+
+    function successMessage(msg){
+        $("#success_msg").empty();
+        $("#error_msg").empty();
+
+        $("#error_msg").hide();
+        $("#success_msg").append(msg);
+        $("#success_msg").show();
+    }
+</script>
+{{end}}

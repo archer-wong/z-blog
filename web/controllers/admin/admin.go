@@ -8,10 +8,11 @@ import (
 	"z-blog/web/service"
 )
 
-func Index(ctx *macaron.Context) string{
+func Index(ctx *macaron.Context){
 	ctx.Data["msg"] = "welcome to z-blog"
-	return  "welcome to z-blog"
+	ctx.HTML(200, "admin/index")
 }
+
 
 func Login(ctx *macaron.Context) {
 	ctx.HTML(200, "admin/login")

@@ -4,18 +4,48 @@
         <li>
             <h3><i class="list icon"></i>内容管理</h3>
             <ul class="sub_menu" style="display: block;">
-                <li class=""><a href="/admin/category/create"><i class="motorcycle middle aligned icon"></i>添加分类</a></li>
-                <li class="on"><a href="/admin/category"><i class="fighter jet middle aligned icon"></i>分类列表</a></li>
-                <li class=""><a href="/admin/article/create"><i class="motorcycle middle aligned icon"></i>添加文章</a></li>
-                <li class=""><a href="/admin/article"><i class="fighter jet middle aligned icon"></i>文章列表</a></li>
+                <li class="category-create"><a href="/admin/category/create"><i class="motorcycle middle aligned icon"></i>添加分类</a></li>
+                <li class="category-list"><a href="/admin/category"><i class="fighter jet middle aligned icon"></i>分类列表</a></li>
+                <li class="article-create"><a href="/admin/article/create"><i class="motorcycle middle aligned icon"></i>添加文章</a></li>
+                <li class="article-list"><a href="/admin/article"><i class="fighter jet middle aligned icon"></i>文章列表</a></li>
             </ul>
         </li>
         <li>
             <h3><i class="globe icon"></i>系统设置</h3>
             <ul class="sub_menu" style="display: none;">
-                <li><a href="/admin/links"><i class="share alternate middle aligned icon"></i>友情链接</a></li>
+                <li class="link-list"><a href="/admin/link"><i class="share alternate middle aligned icon"></i>友情链接</a></li>
             </ul>
         </li>
     </ul>
 </div>
+
+<script>
+    //左侧点击事件
+    $(function(){
+        $('.sub_menu').find('li').click(function(){
+            $(this).parents('.menu_box').find('li').removeClass('on');
+            $(this).addClass('on');
+        });
+    })
+
+    //左侧点击弹开子菜单
+    $(function(){
+        $('.menu_box').find('ul').find('li').find('h3').click(function(){
+            $(this).parent('li').find('.sub_menu').slideToggle();
+        });
+    })
+
+    //菜单高亮判断
+    $(function(){
+        var menu_class = "{{ . }}";
+        if (menu_class != ""){
+            $("." + menu_class).parent().show();
+            $("." + menu_class).addClass("on");
+        } else {
+            $('.menu_box').find('ul').find('li').eq(0).find('.sub_menu').show();
+        }
+    })
+
+</script>
+
 {{end}}

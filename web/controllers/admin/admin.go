@@ -9,7 +9,6 @@ import (
 )
 
 func Index(ctx *macaron.Context){
-	ctx.Data["msg"] = "welcome to z-blog"
 	ctx.HTML(200, "admin/index")
 }
 
@@ -45,4 +44,8 @@ func DoLogin(ctx *macaron.Context, cpt *captcha.Captcha, sess session.Store, fla
 	}
 }
 
+func Logout(ctx *macaron.Context, sess session.Store) {
+	sess.Flush()
+	ctx.Redirect("/admin/login")
+}
 

@@ -1,0 +1,154 @@
+{{ template "admin.header" .}}
+
+<div class="main-box">
+    <div class="left-box">
+        {{ template "admin.left_menu"  "link-list"}}
+    </div>
+    <div class="right-box">
+
+        {{ $breadcrumb :=  Breadcrumb "友情链接" "链接列表"}}
+        {{ template "admin.breadcrumb" $breadcrumb}}
+
+        {{ template "admin.message" .}}
+        <div class="ui container">
+            <button class="ui primary basic button" id="link_show">添加</button>
+            <table class="ui striped celled table">
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>URL</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range .Links}}
+                        <tr>
+                            <td>{{.Title}}</td>
+                            <td>{{.Url}}</td>
+                            <td>
+                                <a class="ui primary button" onclick="editItem({{ .Id }}, {{ .Title }}, {{ .Url}})">编辑</a>
+                                <button class="ui red button" onclick="deleteItem({{ .Id }}, {{ .Title }})">删除</button>
+                            </td>
+                        </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="ui modal" id="link_modal">
+    <i class="close icon"></i>
+    <div class="header">友情链接</div>
+    <div class="content">
+        <form class="ui form" method="post" action="/admin/link" id="link_form">
+            <table class="ui striped celled table">
+                <tbody>
+                <tr>
+                    <td>标题</td>
+                    <td>
+                        <input type="text" name="title" placeholder="标题">
+                    </td>
+                </tr>
+                <tr>
+                    <td>URL</td>
+                    <td>
+                        <input type="text" name="url" placeholder="url">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="actions">
+        <div class="ui button" id="cancel_create_modal">取消</div>
+        <div class="ui green button" id="link_create">确认</div>
+    </div>
+</div>
+
+<div class="ui modal" id="link_edit_modal">
+    <i class="close icon"></i>
+    <div class="header">友情链接</div>
+    <div class="content">
+        <form class="ui form" method="post" action="#" id="link_edit_form">
+            <table class="ui striped celled table">
+                <tbody>
+                <tr>
+                    <td>标题</td>
+                    <td>
+                        <input type="text" name="title" placeholder="标题" id="link_edit_title">
+                    </td>
+                </tr>
+                <tr>
+                    <td>URL</td>
+                    <td>
+                        <input type="text" name="url" placeholder="url" id="link_edit_url">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="actions">
+        <div class="ui button" id="cancel_edit_modal">取消</div>
+        <div class="ui green button" id="link_update">确认</div>
+    </div>
+</div>
+
+
+<script>
+
+    // 添加
+    $("#link_show").click(function(){
+        $('#link_modal').modal('show');
+    })
+
+    $("#link_create").click(function(){
+        $("#link_form").submit();
+    })
+
+    $("#cancel_create_modal").click(function(){
+        $('#link_modal').modal('hide');
+    })
+
+
+    // 编辑
+    function editItem(id, title, url){
+        $("#link_edit_title").val(title);
+        $("#link_edit_url").val(url);
+        $("#link_edit_form").attr("action", "/admin/link/" + id)
+
+        $('#link_edit_modal').modal('show');
+    }
+
+    $("#link_update").click(function(){
+        $("#link_edit_form").submit();
+    })
+
+    $("#cancel_edit_modal").click(function(){
+        $('#link_edit_modal').modal('hide');
+    })
+
+    //删除
+    function deleteItem(id, title){
+        $.ajax( {
+            type : "DELETE",
+            url : "/admin/link/" + id,
+            dataType:'json',
+            success : function(res) {
+                if(res.success){
+                    successMessage("删除友情链接[ " + title + " ]成功")
+                    setTimeout(function()
+                    {
+                        location.reload()
+                    }, 1000)
+
+                }else{
+                    errorMessage("删除友情链接[ " + title + " ]失败")
+                }
+            }
+        })
+    }
+</script>
+
+{{ template "admin.footer" .}}

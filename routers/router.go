@@ -10,6 +10,7 @@ import (
 func initRouter() {
 	m.Get("/", home.Index).Name("index")
 	m.Get("/admin", admin.Index).Name("admin.index")
+	m.Get("/admin/logout", admin.Logout).Name("admin.logout")
 
 	//分类路由
 	m.Get("/admin/category", admin.CategoryIndex).Name("admin.category_index")
@@ -27,9 +28,16 @@ func initRouter() {
 	m.Post("/admin/article/:id:int", admin.ArticleUpdate).Name("admin.article_update")
 	m.Delete("/admin/article/:id:int", admin.ArticleDestroy).Name("admin.article_destroy")
 
+	//友情链接
+	m.Get("/admin/link", admin.LinkIndex).Name("admin.link_index")
+	m.Post("/admin/link", admin.LinkStore).Name("admin.link_store")
+	m.Post("/admin/link/:id:int", admin.LinkUpdate).Name("admin.link_update")
+	m.Delete("/admin/link/:id:int", admin.LinkDestroy).Name("admin.link_destroy")
+
 	m.Group("admin", func() {
 		m.Get("/login", admin.Login).Name("admin.login")
 		m.Post("/do-login", admin.DoLogin).Name("admin.do-login")
+
 	}, middlewares.AuthLogin)
 
 	m.Group("admin", func() {

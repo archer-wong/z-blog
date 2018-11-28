@@ -13,6 +13,7 @@ body {
     width: 100%;
     background: #222;
     position: fixed;
+    z-index: 101;
     top: 0;
     left: 0;
     font-size: 14px;
@@ -21,12 +22,12 @@ body {
 
 .left-box{
     position: fixed;
+    z-index: 100;
     top: 50px;
     bottom: 0;
     padding: 0 0 50px;
     width: 196px;
     height: calc(100% - 40px);
-    z-index: 1024;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -43,6 +44,7 @@ body {
 
 .footer {
     position: fixed;
+    z-index: 99;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -58,7 +60,7 @@ body {
 .header-logo{
     width:196px;
     font-size:18px;
-    background:#3D3E3F !important;
+    /*background:#3D3E3F !important;*/
     color:#9d9d9d !important;
 }
 

@@ -34,6 +34,11 @@ func initRouter() {
 	m.Post("/admin/link/:id:int", admin.LinkUpdate).Name("admin.link_update")
 	m.Delete("/admin/link/:id:int", admin.LinkDestroy).Name("admin.link_destroy")
 
+
+	//前台路由
+	m.Get("/article/:id:int", home.ArticleShow).Name("home.article_show")
+	m.Get("/category/:id:int", home.ArticlesByCategory).Name("home.articles_by_category")
+
 	m.Group("admin", func() {
 		m.Get("/login", admin.Login).Name("admin.login")
 		m.Post("/do-login", admin.DoLogin).Name("admin.do-login")

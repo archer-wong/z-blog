@@ -1,27 +1,22 @@
 {{ template "home.header" .}}
 
-<div class="ui center aligned main-container">
+<div class="main-container">
     <div class="ui grid main-box">
-        <div class="eleven wide column left-main">
-            <div class="bloglist">
-                <h2><a href="/rs/1041.html" title="<font color='1FADFF'>快乐的人生，少一分在意，多一份宽恕</font>"><font color="1FADFF">快乐的人生，少一分在意，多一份宽恕</font></a></h2>
-                <p>生活中，每个人都有自己在意的东西，或大或小，或人或物，亦或一些事情。记忆，是每个人与生俱来的本能，美好会记着，不好的更会记得。所以，很多人觉得自己不快乐，是因为</p>
-            </div>
-            <div class="bloglist">
-                <h2><a href="/rs/1041.html" title="<font color='1FADFF'>快乐的人生，少一分在意，多一份宽恕</font>"><font color="1FADFF">快乐的人生，少一分在意，多一份宽恕</font></a></h2>
-                <p>生活中，每个人都有自己在意的东西，或大或小，或人或物，亦或一些事情。记忆，是每个人与生俱来的本能，美好会记着，不好的更会记得。所以，很多人觉得自己不快乐，是因为</p>
-            </div>
-            <div class="bloglist">
-                <h2><a href="/rs/1041.html" title="<font color='1FADFF'>快乐的人生，少一分在意，多一份宽恕</font>"><font color="1FADFF">快乐的人生，少一分在意，多一份宽恕</font></a></h2>
-                <p>生活中，每个人都有自己在意的东西，或大或小，或人或物，亦或一些事情。记忆，是每个人与生俱来的本能，美好会记着，不好的更会记得。所以，很多人觉得自己不快乐，是因为</p>
-            </div>
-            <div class="bloglist">
-                <h2><a href="/rs/1041.html" title="<font color='1FADFF'>快乐的人生，少一分在意，多一份宽恕</font>"><font color="1FADFF">快乐的人生，少一分在意，多一份宽恕</font></a></h2>
-                <p>生活中，每个人都有自己在意的东西，或大或小，或人或物，亦或一些事情。记忆，是每个人与生俱来的本能，美好会记着，不好的更会记得。所以，很多人觉得自己不快乐，是因为</p>
-            </div>
+        <div class="thirteen wide column left-main">
+            {{if .Category }}
+                <div class="bloglist">
+                   <h2>随笔分类 - {{ .Category.Title }}</h2>
+                </div>
+            {{end}}
+            {{range .Articles}}
+                <div class="bloglist">
+                    <h2><a href="/article/{{ .Id }}" title="<font color='1FADFF'>{{ .Title }}</font>"><font color="1FADFF">{{ .Title }}</font></a></h2>
+                    <p>{{ SubString .Content 100 }}</p>
+                </div>
+            {{end}}
         </div>
 
-        <div class="five wide column right-main">
+        <div class="three wide column right-main">
             {{ template "home.right_list_box" .}}
         </div>
 

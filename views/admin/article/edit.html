@@ -17,9 +17,9 @@
                     <tr>
                         <td>分类</td>
                         <td>
-                            <select class="ui dropdown" name="category_id" value="{{ .Article.CategoryId }}">
+                            <select class="ui dropdown" name="category_id">
                             {{ range .Categories}}
-                                <option value="{{ .Id }}">{{ .Title }}</option>
+                                <option value="{{ .Id }}" {{if eq $.Article.CategoryId .Id }} selected {{end}}>{{ .Title }}</option>
                             {{end}}
                             </select>
                         </td>
@@ -54,6 +54,10 @@
         </div>
     </div>
 </div>
-
+<script>
+    $('.ui.dropdown')
+            .dropdown()
+    ;
+</script>
 {{ template "admin.footer" .}}
 

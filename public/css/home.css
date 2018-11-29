@@ -1,38 +1,32 @@
 body { font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif; color: #555; background: #efefef; line-height: 1.5; }
 
-/*header*/
-.header {
+/***********布局*******************/
+.header-box {
+    border-radius:0;
+    height: 120px;
     width: 100%;
     background: #fff;
-    overflow: hidden;
-    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    left: 0;
 }
 
-.header .logo {
-    text-align: center;
-    font-size: 22px;
-    padding: 20px 0
-}
-
-.header .menu {
-    width: 1000px;
-    margin: 0 auto 20px !important;
-    border:none;
-    border-bottom: #000 2px solid;
-    border-top: #000 2px solid;
-    border-radius:0;
-}
 .main-container{
-    width: 1000px;
-    min-height:500px;
-    margin: auto;
-    overflow: hidden;
-    clear: both;
+    width:100%;
     background:#efefef;
+    position: fixed;
+    z-index: 100;
+    top: 120px;
+    bottom: 40px;
+    height: calc(100% - 160px);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .main-box{
-    margin-top:20px !important;
+    width: 80%;
+    margin:0 auto !important;
     background:#efefef;
 }
 
@@ -40,13 +34,54 @@ body { font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif; color: #555; 
     background:#efefef;
 }
 
+
+.right-main{
+    background:#efefef;
+    min-width:180px !important;
+}
+
+.footer {
+    position: fixed;
+    z-index: 99;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height:40px;
+    text-align: center;
+    background: #FFF;
+    padding: 10px 0;
+    line-height: 40px;
+    border-top: #333 1px solid;
+}
+
+/***********布局end*******************/
+
+
+
+
+/***********首页其它样式*******************/
+/***头部***/
+.header-box .logo {
+    text-align: center;
+    font-size: 22px;
+    padding: 10px 0
+}
+.header-box .menu {
+    width: 80%;
+    margin: 0 auto 20px !important;
+    border:none;
+    border-bottom: #000 2px solid;
+    border-top: #000 2px solid;
+    border-radius:0;
+}
+
+/***首页文章列表***/
 .bloglist {
     background: #FFF;
     overflow: hidden;
     padding: 20px;
     margin-bottom: 20px;
 }
-
 .bloglist h2 {
     font-size: 18px;
     position: relative
@@ -71,21 +106,98 @@ body { font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif; color: #555; 
     margin: 10px 0 0
 }
 
-.right-main{
-    background:#efefef;
-}
+
+/***右侧分类，排行等***/
 .right-list-box{
     background:#FFF;
     margin-bottom:20px;
     padding:10px;
 }
+/***********首页其它样式end*******************/
 
-.footer {
+
+
+/****************文章详情样式************************/
+.infosbox {
     width: 100%;
-    text-align: center;
+    overflow: hidden;
     background: #FFF;
-    padding: 10px 0;
-    line-height: 26px;
-    border-top: #333 1px solid;
 }
+
+.newsview {
+    padding: 20px;
+    overflow: hidden;
+    background: rgba(255,255,255,1);
+    margin: 20px 0 0 0;
+}
+
+/***标题***/
+.news_title {
+    font-size: 24px;
+    font-weight: normal;
+}
+
+/***标题下作者文章信息***/
+.bloginfo {
+    overflow: hidden;
+    margin:10px 0 20px 0;
+}
+
+.bloginfo ul li {
+    float: left;
+    font-size: 12px;
+    margin: 0 15px 0 0;
+    color: #748594;
+    line-height: 1.5;
+    display: inline-block;
+}
+
+.bloginfo ul li a {
+    color: #748594;
+}
+
+.bloginfo ul li a:hover {
+    color: #000
+}
+
+/***标签***/
+.tags {
+    margin-top: 20px;
+}
+.tags a {
+    background: #333;
+    padding: 3px 8px;
+    margin: 0 5px 0 0;
+    color: #fff;
+}
+
+/***上一篇***/
+.nextinfo {
+    line-height: 24px;
+    width: 100%;
+    background: #FFF;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 20px 0
+}
+
+.nextinfo p {
+    padding: 4px 10px;
+    border-radius: 5px;
+}
+
+.nextinfo a:hover {
+    color: #000;
+    text-decoration: underline
+}
+/****************文章详情样式end************************/
+
+@media only screen and (max-width: 767px) {
+    .right-main{
+        display:none !important;
+    }
+}
+
+
+
 

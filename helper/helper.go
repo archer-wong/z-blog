@@ -3,6 +3,7 @@ package helper
 import (
 	"crypto/sha1"
 	"encoding/hex"
+	"time"
 	"z-blog/modules/setting"
 )
 
@@ -14,4 +15,19 @@ func Encrypt(raw string) string {
 	encrypt := hex.EncodeToString(sha1.Sum([]byte("")))
 
 	return encrypt
+}
+
+func DateTime(t time.Time, layout string) string {
+	return t.Format(layout) //`2006-01-02 15:04:05`
+}
+
+func SubString(str string, num int) string {
+	subStr := []rune(str)
+	len := len(subStr)
+	if len > num {
+
+		return string(subStr[0:num])
+	}
+
+	return str
 }

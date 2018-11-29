@@ -3,18 +3,11 @@ package service
 import (
 	"z-blog/web/model"
 )
-func ArticleIndex() ([]model.ArticleWithCategory, error){
+func ArticleIndex() ([]model.Article, error){
 	var articles []model.Article
-	err := model.Db.Order("created_at desc").Find(&articles).Error
+	err := model.Db.Order("created_at desc").Preload("Category").Find(&articles).Error
 
-	var articlesWithCategory []model.ArticleWithCategory
-	for _, article := range articles{
-		var category model.Category
-		model.Db.Where("id = ?", article.CategoryId).First(&category)
-		articlesWithCategory = append(articlesWithCategory, model.ArticleWithCategory{article, category.Title})
-	}
-
-	return articlesWithCategory, err
+	return articles, err
 }
 
 func ArticleStore(article model.Article) error{
@@ -38,8 +31,37 @@ func ArticleDeleteById(id int) (error){
 
 func ArticleById(id int) (model.Article, error){
 	var article model.Article
-	err := model.Db.Where("id = ?", id).First(&article).Error
+	err := model.Db.Where("id = ?", id).Preload("Category").First(&article).Error
 
 	return article, err
+}
+
+func ArticlePre(id int) (model.Article, error){
+	var article model.Article
+	err := model.Db.Where("id < ?", id).Order("id desc").First(&article).Error
+
+	return article, err
+}
+
+func ArticleNext(id int) (model.Article, error){
+	var article model.Article
+	err := model.Db.Where("id > ?", id).Order("id asc").First(&article).Error
+
+	return article, err
+}
+
+
+func TopArticles() ([]model.Article, error){
+	var articles []model.Article
+	err := model.Db.Order("view desc").Limit(5).Find(&articles).Error
+
+	return articles, err
+}
+
+func ArticleByCategory(categoryId int) ([]model.Article, error){
+	var articles []model.Article
+	err := model.Db.Where("category_id = ?", categoryId).Find(&articles).Error
+
+	return articles, err
 }
 

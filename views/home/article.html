@@ -1,0 +1,44 @@
+{{ template "home.header" .}}
+
+<div class="ui center aligned main-container">
+    <div class="ui grid main-box">
+        <div class="thirteen wide column left-main">
+            <div class="infosbox">
+                <div class="newsview">
+                    <h3 class="news_title">{{ .Article.Title }}</h3>
+                    <div class="bloginfo">
+                        <ul>
+                            <li class="author">作者：archer</li>
+                            <li class="lmname">分类：{{ .Article.Category.Title }}</li>
+                            <li class="timer">时间：{{ DateTime .Article.CreatedAt "2006-01-02 15:04:05"}}</li>
+                            <li class="view">阅读：{{ .Article.View }}</li>
+                        </ul>
+                    </div>
+                    <div class="news_con">
+                        {{ .Article.Content }}
+                    </div>
+                    <div class="tags">标签：{{ .Article.Tag }}</div>
+                </div>
+                <div class="nextinfo">
+                    {{ if .PreArticle.Id }}
+                        <p>上一篇：<a href="/article/{{ .PreArticle.Id }}">{{ .PreArticle.Title }}</a></p>
+                    {{ else }}
+                        <p>上一篇：<a href="#">没有上一篇了</a></p>
+                    {{ end }}
+                    {{ if .NextArticle.Id }}
+                        <p>下一篇：<a href="/article/{{ .NextArticle.Id }}">{{ .NextArticle.Title }}</a></p>
+                    {{ else }}
+                        <p>下一篇：<a href="#">没有下一篇了</a></p>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+
+        <div class="three wide column right-main">
+            {{ template "home.right_list_box" .}}
+        </div>
+
+    </div>
+</div>
+
+{{ template "home.footer" .}}

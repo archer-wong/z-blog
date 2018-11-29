@@ -6,24 +6,14 @@
         文章分类
     </h3>
     <div class="ui relaxed divided list">
+        {{ range Categories}}
         <div class="item">
             <i class="large motorcycle middle aligned icon"></i>
             <div class="content">
-                <a class="header">Semantic-Org/Semantic-UI</a>
+                <a class="header" href="/category/{{ .Id }}">{{ .Title }}</a>
             </div>
         </div>
-        <div class="item">
-            <i class="large motorcycle middle aligned icon"></i>
-            <div class="content">
-                <a class="header">Semantic-Org/Semantic-UI-Docs</a>
-            </div>
-        </div>
-        <div class="item">
-            <i class="large motorcycle middle aligned icon"></i>
-            <div class="content">
-                <a class="header">Semantic-Org/Semantic-UI-Meteor</a>
-            </div>
-        </div>
+        {{end}}
     </div>
 </div>
 
@@ -33,24 +23,14 @@
         阅读排行
     </h3>
     <div class="ui relaxed divided list">
-        <div class="item">
-            <i class="large bicycle middle aligned icon"></i>
-            <div class="content">
-                <a class="header">Semantic-Org/Semantic-UI</a>
+        {{ range TopArticles}}
+            <div class="item">
+                <i class="large bicycle middle aligned icon"></i>
+                <div class="content">
+                    <a class="header" href="/article/{{ .Id}}">{{ .Title }}</a>
+                </div>
             </div>
-        </div>
-        <div class="item">
-            <i class="large bicycle middle aligned icon"></i>
-            <div class="content">
-                <a class="header">Semantic-Org/Semantic-UI-Docs</a>
-            </div>
-        </div>
-        <div class="item">
-            <i class="large bicycle middle aligned icon"></i>
-            <div class="content">
-                <a class="header">Semantic-Org/Semantic-UI-Meteor</a>
-            </div>
-        </div>
+        {{ end }}
     </div>
 </div>
 
@@ -60,24 +40,14 @@
         友情链接
     </h3>
     <div class="ui relaxed divided list">
-        <div class="item">
-            <i class="large fighter jet middle aligned icon"></i>
-            <div class="content">
-                <a class="header">Semantic-Org/Semantic-UI</a>
+        {{ range Links}}
+            <div class="item">
+                <i class="large fighter jet middle aligned icon"></i>
+                <div class="content">
+                    <a class="header" href="{{ .Url }}">{{ .Title }}</a>
+                </div>
             </div>
-        </div>
-        <div class="item">
-            <i class="large fighter jet right middle aligned icon"></i>
-            <div class="content">
-                <a class="header">Semantic-Org/Semantic-UI-Docs</a>
-            </div>
-        </div>
-        <div class="item">
-            <i class="large fighter jet middle aligned icon"></i>
-            <div class="content">
-                <a class="header">Semantic-Org/Semantic-UI-Meteor</a>
-            </div>
-        </div>
+        {{ end }}
     </div>
 </div>
 

@@ -9,7 +9,9 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"z-blog/helper"
 	"z-blog/modules/setting"
+	"z-blog/web/controllers"
 )
 
 var (
@@ -102,6 +104,11 @@ func initTmpl() {
 				return "1.0.0"
 			},
 			"URL": m.URLFor,
+			"DateTime": helper.DateTime,
+			"SubString": helper.SubString,
+			"Categories": controllers.Categories,
+			"TopArticles": controllers.TopArticles,
+			"Links": controllers.Links,
 			"Breadcrumb": func(first, second string) []string {
 				values := []string{first, second}
 				return values

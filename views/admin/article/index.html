@@ -25,12 +25,12 @@
                 <tbody>
                     {{range .Articles}}
                         <tr>
-                            <td>{{.Article.Title}}</td>
-                            <td>{{.CategoryName}}</td>
-                            <td>{{.Article.Tag}}</td>
+                            <td>{{.Title}}</td>
+                            <td>{{.Category.Title}}</td>
+                            <td>{{.Tag}}</td>
                             <td>
-                                <a class="ui primary button" href="/admin/article/{{.Article.Id}}/edit">编辑</a>
-                                <button class="ui red button" onclick="deleteItem({{ .Article.Id }}, {{ .Article.Title }})">删除</button>
+                                <a class="ui primary button" href="/admin/article/{{.Id}}/edit">编辑</a>
+                                <button class="ui red button" onclick="deleteItem({{ .Id }}, {{ .Title }})">删除</button>
                             </td>
                         </tr>
                     {{end}}

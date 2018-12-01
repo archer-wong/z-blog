@@ -5,11 +5,15 @@
         {{ template "admin.left_menu" ""}}
     </div>
     <div class="right-box">
-        <div class="ui container">
-            <h2 class="ui header">
-                欢迎使用Z-BLOG系统
-            </h2>
-        </div>
+
+        {{ $breadcrumb :=  Breadcrumb "欢迎" ""}}
+        {{ template "admin.breadcrumb" $breadcrumb}}
+
+        {{ template "admin.message" .}}
+
+        <h2 class="ui header">
+            欢迎使用Z-BLOG系统
+        </h2>
     </div>
 </div>
 

@@ -26,10 +26,10 @@
             </div>
             <div class="right menu">
                 <div class="item">
-                    管理员：admin
+                    管理员：{{ Admin.Username }}
                 </div>
-                <div class="item" style="display:none">
-                    <a href="/admin/pass" target="main">修改密码</a>
+                <div class="item">
+                    <a href="javascript:void(0)" id="user_modal_show">修改密码</a>
                 </div>
                 <div class="item">
                     <a href="/admin/logout">退出</a>
@@ -37,4 +37,56 @@
             </div>
         </div>
     </div>
+
+    <div class="ui modal" id="user_modal">
+        <i class="close icon"></i>
+        <div class="header">用户信息</div>
+        <div class="content">
+            <form class="ui form" method="post" action="/admin/password" id="user_form">
+                <table class="ui striped celled table">
+                    <tbody>
+                    <tr>
+                        <td>原密码</td>
+                        <td>
+                            <input type="hidden" name="username" value="{{ Admin.Username }}">
+                            <input type="password" name="password" placeholder="原密码">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>新密码</td>
+                        <td>
+                            <input type="password" name="new_password" placeholder="请输入新密码">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>确认密码</td>
+                        <td>
+                            <input type="password" name="confirm_password" placeholder="请再次输入新密码">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div class="actions">
+            <div class="ui button" id="cancel_user_modal">取消</div>
+            <div class="ui green button" id="confirm_password">确认</div>
+        </div>
+    </div>
+
+    <script>
+        $("#user_modal_show").click(function(){
+            $('#user_modal').modal('show');
+        })
+
+        $("#confirm_password").click(function(){
+            $("#user_form").submit();
+        })
+
+        $("#cancel_user_modal").click(function(){
+            $('#user_modal').modal('hide');
+        })
+
+    </script>
+
 {{end}}

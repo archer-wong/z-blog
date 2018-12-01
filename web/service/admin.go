@@ -19,3 +19,9 @@ func GetAdmin() (*model.Admin, error) {
 	err := model.Db.First(user).Error
 	return user, err
 }
+
+func AdminUpdate(admin, update model.Admin) error{
+	err := model.Db.Model(&admin).Update(update).Error
+
+	return err
+}

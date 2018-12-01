@@ -11,7 +11,7 @@
             {{range .Articles}}
                 <div class="bloglist">
                     <h2><a href="/article/{{ .Id }}" title="<font color='1FADFF'>{{ .Title }}</font>"><font color="1FADFF">{{ .Title }}</font></a></h2>
-                    <p>{{ SubString .Content 100 }}</p>
+                    <p>{{  .Content  }}</p>
                 </div>
             {{end}}
         </div>

@@ -28,3 +28,11 @@ func Links() []model.Link{
 	}
 	return links
 }
+
+func Admin() *model.Admin{
+	admin, err := service.GetAdmin()
+	if err != nil {
+		return nil
+	}
+	return admin
+}

@@ -1,5 +1,8 @@
 {{ template "admin.header" .}}
 
+<link rel="stylesheet" href="/public/editor.md-master/examples/css/style.css" />
+<link rel="stylesheet" href="/public/editor.md-master/css/editormd.css" />
+
 <div class="main-box">
     <div class="left-box">
         {{ template "admin.left_menu"  "article-create"}}
@@ -11,55 +14,78 @@
 
         {{ template "admin.message" .}}
 
-        <div class="ui container">
-            <form class="ui form" method="post" action="/admin/article">
-                <table class="ui striped celled table">
-                    <tbody>
-                        <tr>
-                            <td>分类</td>
-                            <td>
-                                <select class="ui dropdown" name="category_id">
-                                    {{ range .Categories}}
-                                        <option value="{{ .Id }}">{{ .Title }}</option>
-                                    {{end}}
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>标题</td>
-                            <td>
-                                <input type="text" name="title" placeholder="标题">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>标签</td>
-                            <td>
-                                <input type="text" name="tag" placeholder="多个标签请使用逗号分隔 eg:php,golang,js">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>内容</td>
-                            <td>
-                                <input type="text" name="content" placeholder="内容">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <button class="ui primary button">提交</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
-        </div>
+        <form class="ui form" method="post" action="/admin/article">
+            <table class="ui striped celled table">
+                <tbody>
+                    <tr>
+                        <td>分类</td>
+                        <td>
+                            <select class="ui dropdown" name="category_id">
+                                {{ range .Categories}}
+                                    <option value="{{ .Id }}">{{ .Title }}</option>
+                                {{end}}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>标题</td>
+                        <td>
+                            <input type="text" name="title" placeholder="标题">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>标签</td>
+                        <td>
+                            <input type="text" name="tag" placeholder="多个标签请使用逗号分隔 eg:php,golang,js">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>内容</td>
+                        <td>
+                            <div id="editormd">
+                                <textarea name="content" style="display:none;"></textarea>>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button class="ui primary button">提交</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+
+        <div class="right-bottom-div"></div>
+
     </div>
 </div>
 
-<script>
-    $('.ui.dropdown')
-            .dropdown()
-    ;
+<script src="/public/editor.md-master/editormd.js"></script>
+
+<script type="text/javascript">
+
+    var zEditor;
+    $(function() {
+        zEditor = editormd("editormd", {
+            width   : "90%",
+            height  : 640,
+            syncScrolling : "single",
+            path    : "/public/editor.md-master/lib/",
+            onload : function() {
+                //console.log('onload', this);
+            },
+            onfullscreen : function() {
+                //console.log('onfull', this);
+                $("#editormd").css("z-index", 1000)
+            },
+            onfullscreenExit : function() {
+                $("#editormd").css("z-index", "")
+            },
+        });
+    });
+
 </script>
 
 {{ template "admin.footer" .}}

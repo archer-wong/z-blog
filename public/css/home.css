@@ -1,11 +1,16 @@
-body { font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif; color: #555; background: #efefef; line-height: 1.5; }
+body {
+    font: 15px "Microsoft YaHei",
+    Arial, Helvetica, sans-serif;
+    color: #555;
+    background: #efefef !important;
+    line-height: 1.5;
+}
 
 /***********布局*******************/
 .header-box {
     border-radius:0;
     height: 120px;
     width: 100%;
-    background: #fff;
     position: fixed;
     z-index: 101;
     top: 0;
@@ -14,9 +19,7 @@ body { font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif; color: #555; 
 
 .main-container{
     width:100%;
-    background:#efefef;
     position: fixed;
-    z-index: 100;
     top: 120px;
     bottom: 40px;
     height: calc(100% - 160px);
@@ -27,16 +30,13 @@ body { font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif; color: #555; 
 .main-box{
     width: 80%;
     margin:0 auto !important;
-    background:#efefef;
 }
 
 .left-main{
-    background:#efefef;
 }
 
 
 .right-main{
-    background:#efefef;
     min-width:180px !important;
 }
 
@@ -69,9 +69,6 @@ body { font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif; color: #555; 
 .header-box .menu {
     width: 80%;
     margin: 0 auto 20px !important;
-    border:none;
-    border-bottom: #000 2px solid;
-    border-top: #000 2px solid;
     border-radius:0;
 }
 
@@ -162,6 +159,7 @@ body { font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif; color: #555; 
 
 /***标签***/
 .tags {
+    text-align:left;
     margin-top: 20px;
 }
 .tags a {
@@ -173,6 +171,7 @@ body { font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif; color: #555; 
 
 /***上一篇***/
 .nextinfo {
+    text-align:left;
     line-height: 24px;
     width: 100%;
     background: #FFF;

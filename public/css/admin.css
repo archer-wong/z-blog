@@ -1,7 +1,7 @@
 body {
     font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif;
     color: #555;
-    background: #efefef;
+    background: #efefef !important;
     line-height: 1.5;
 }
 
@@ -39,7 +39,7 @@ body {
     height: calc(100% - 90px);
     position: absolute;
     background-color: #f9f9f9;
-    padding: 25px 15px;
+    padding: 25px 15px 40px 15px;
 }
 
 .footer {
@@ -62,6 +62,13 @@ body {
     font-size:18px;
     /*background:#3D3E3F !important;*/
     color:#9d9d9d !important;
+}
+.right-bottom-div{
+    height:40px;
+}
+
+.editormd-dialog{
+    height:auto !important;
 }
 
 /********左侧菜单栏********/

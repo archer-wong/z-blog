@@ -1,0 +1,153 @@
+{{ template "admin.header" .}}
+
+<div class="main-box">
+    <div class="left-box">
+        {{ template "admin.left_menu"  "markdown-list"}}
+    </div>
+    <div class="right-box">
+
+        {{ $breadcrumb :=  Breadcrumb "批量上传" "上传列表"}}
+        {{ template "admin.breadcrumb" $breadcrumb}}
+
+        {{ template "admin.message" .}}
+
+        <div class="ui container">
+            <a class="ui primary basic button" href="/admin/markdown/create">导入MD文件</a>
+            <button class="ui basic button" id="add_article" >发布文章</button>
+            <table class="ui striped celled table">
+                <thead>
+                <tr>
+                    <th>
+                        <div class="ui checkbox" id="select_norelated">
+                            <input type="checkbox">
+                            <label>未关联</label>
+                        </div>
+                        <div class="ui checkbox" id="select_invert">
+                            <input type="checkbox">
+                            <label>反选</label>
+                        </div>
+                    </th>
+                    <th>关联文章</th>
+                    <th>标题</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{range .Markdowns}}
+                <tr>
+                {{ if .ArticleId}}
+                    <td>
+                        <div class="ui checkbox related">
+                            <input type="checkbox" name="id" value="{{ .Id }}">
+                        </div>
+                    </td>
+                    <td>已关联</td>
+                {{else}}
+                    <td>
+                        <div class="ui checkbox no-related">
+                            <input type="checkbox" name="id" value="{{ .Id }}">
+                        </div>
+                    </td>
+                    <td>未关联</td>
+                {{end}}
+                    <td>{{.Title}}</td>
+                    <td>
+                        <button class="ui red button" onclick="deleteItem({{ .Id }}, {{ .Title }})">删除</button>
+                    </td>
+                </tr>
+                {{end}}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<div class="ui modal" id="add_article_modal">
+    <i class="close icon"></i>
+    <div class="header">批量发布文章</div>
+    <div class="content">
+        <form class="ui form" method="post" action="/admin/markdown/publish" id="add_article_form">
+            <input type="hidden" name="ids" id="id_arr" value="">
+            <table class="ui striped celled table">
+                <tbody>
+                <tr>
+                    <td>分类</td>
+                    <td>
+                        <select class="ui dropdown" name="category_id">
+                        {{ range .Categories}}
+                            <option value="{{ .Id }}">{{ .Title }}</option>
+                        {{end}}
+                        </select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <div class="actions">
+        <div class="ui button" id="cancel_modal">取消</div>
+        <div class="ui green button" id="confirm_submit">确认</div>
+    </div>
+</div>
+
+<script src="/public/jQuery-File-Upload-9.28.0/js/vendor/jquery.ui.widget.js"></script>
+<script src="/public/jQuery-File-Upload-9.28.0/js/jquery.iframe-transport.js"></script>
+<script src="/public/jQuery-File-Upload-9.28.0/js/jquery.fileupload.js"></script>
+
+<script>
+    function deleteItem(id, title){
+        $.ajax( {
+            type : "DELETE",
+            url : "/admin/markdown/" + id,
+            dataType:'json',
+            success : function(res) {
+                if(res.success){
+                    successMessage("删除Markdown[ " + title + " ]成功")
+                    setTimeout(function()
+                    {
+                        location.reload()
+                    }, 1000)
+
+                }else{
+                    errorMessage("删除Markdown[ " + title + " ]失败")
+                }
+            }
+        })
+    }
+
+    $('.ui.dropdown').dropdown();
+    $('.ui.checkbox').checkbox();
+
+    $("#select_norelated").click(function(){
+        $('.related').checkbox("uncheck");
+        $('.no-related').checkbox("check");
+    })
+
+    $("#select_invert").click(function(){
+        $('.related').checkbox("toggle");
+        $('.no-related').checkbox("toggle");
+    })
+
+    $("#add_article").click(function(){
+        let id_array=new Array();
+        $('input[name="id"]:checked').each(function(){
+            id_array.push($(this).val());//向数组中添加元素
+            4
+        });
+        let idstr=id_array.join(',');//将数组元素连接起来以构建一个字符串
+        $('#id_arr').val(idstr);
+
+        $('#add_article_modal').modal('show');
+    })
+
+    $("#confirm_submit").click(function(){
+        $("#add_article_form").submit();
+    })
+
+    $("#cancel_modal").click(function(){
+        $('#add_article_modal').modal('hide');
+    })
+</script>
+
+{{ template "admin.footer" .}}

@@ -187,7 +187,11 @@ body {
 
 .nextinfo a:hover {
     color: #000;
-    text-decoration: underline
+    text-decoration: underline;
+}
+
+.right-list-box .content {
+    text-align:left;
 }
 /****************文章详情样式end************************/
 

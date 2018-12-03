@@ -1,12 +1,17 @@
 package routers
 
 import (
+	"mime/multipart"
 	"z-blog/web/controllers"
 	"z-blog/web/controllers/admin"
 	"z-blog/web/controllers/home"
 	"z-blog/web/middlewares"
 )
 
+type UploadForm struct {
+	Title      string                `form:"title"`
+	TextUpload *multipart.FileHeader `form:"txtUpload"`
+}
 func initRouter() {
 	//前台路由
 	m.Get("/", home.Index).Name("index")
@@ -45,6 +50,14 @@ func initRouter() {
 		m.Post("/link", admin.LinkStore).Name("admin.link_store")
 		m.Post("/link/:id:int", admin.LinkUpdate).Name("admin.link_update")
 		m.Delete("/link/:id:int", admin.LinkDestroy).Name("admin.link_destroy")
+
+		//批量上传
+		m.Get("/markdown", admin.MarkdownIndex).Name("admin.markdown_index")
+		m.Get("/markdown/create", admin.MarkdownCreate).Name("admin.markdown_create")
+		m.Post("/markdown-upload", admin.MarkdownUpload).Name("admin.markdown_upload")
+		m.Delete("/markdown/:id:int", admin.MarkdownDestroy).Name("admin.markdown_destroy")
+		m.Post("/markdown/publish", admin.MarkdownPublish).Name("admin.markdown_publish")
+
 	}, middlewares.AuthPermission)
 
 

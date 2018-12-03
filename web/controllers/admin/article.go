@@ -32,7 +32,7 @@ func ArticleStore(ctx *macaron.Context, f *session.Flash){
 	categoryId := ctx.QueryInt("category_id")
 
 	article := model.Article{CategoryId:categoryId, Title:title, Content:content, Tag:tag}
-	err := service.ArticleStore(article)
+	_, err := service.ArticleStore(article)
 
 	if err != nil {
 		f.Error("创建新文章[ " + title + " ]失败")

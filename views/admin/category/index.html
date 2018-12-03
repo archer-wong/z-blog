@@ -50,7 +50,11 @@
                     }, 1000)
 
                 }else{
-                    errorMessage("删除分类[ " + title + " ]失败")
+                    if(res.message){
+                        errorMessage("删除分类[ " + title + " ]失败，" + res.message)
+                    } else {
+                        errorMessage("删除分类[ " + title + " ]失败")
+                    }
                 }
             }
         })

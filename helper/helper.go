@@ -3,6 +3,7 @@ package helper
 import (
 	"crypto/sha1"
 	"encoding/hex"
+	"math/rand"
 	"time"
 	"z-blog/modules/setting"
 )
@@ -31,3 +32,20 @@ func SubString(str string, num int) string {
 
 	return str
 }
+
+var (
+	codes   = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+	codeLen = len(codes)
+)
+func RandStringBytes(len int) string {
+	data := make([]byte, len)
+	rand.Seed(time.Now().UnixNano())
+
+	for i := 0; i < len; i++ {
+		idx := rand.Intn(codeLen)
+		data[i] = byte(codes[idx])
+	}
+
+	return string(data)
+}
+

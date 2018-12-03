@@ -10,10 +10,10 @@ func ArticleIndex() ([]model.Article, error){
 	return articles, err
 }
 
-func ArticleStore(article model.Article) error{
+func ArticleStore(article model.Article) (model.Article ,error){
 	err := model.Db.Create(&article).Error
 
-	return err
+	return article, err
 }
 
 func ArticleUpdate(article, update model.Article) error{

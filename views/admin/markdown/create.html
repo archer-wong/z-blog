@@ -1,0 +1,104 @@
+{{ template "admin.header" .}}
+
+<div class="main-box">
+    <div class="left-box">
+        {{ template "admin.left_menu"  "markdown-list"}}
+    </div>
+    <div class="right-box">
+
+        {{ $breadcrumb :=  Breadcrumb "系统设置" "文章上传"}}
+        {{ template "admin.breadcrumb" $breadcrumb}}
+
+        {{ template "admin.message" .}}
+            <div class="ui container">
+                <div class="ui segment">
+                    <a class="ui blue ribbon label">批量上传</a>
+                    <div class="ui input">
+                        <input id="fileupload" type="file" name="files[]" multiple>
+                    </div>
+                    <button class="ui primary right floated button" id="batch_upload">开始上传</button>
+                    <a class="ui right floated button" href="/admin/markdown">返回列表</a>
+                </div>
+
+                <table class="ui striped celled table" style="margin-top:40px;">
+                    <thead>
+                    <tr>
+                        <th>文件名</th>
+                        <th>状态</th>
+                    </tr>
+                    </thead>
+                    <tbody  id="upload_list">
+                    </tbody>
+                </table>
+
+
+                <!-- The global progress bar -->
+                <div id="progress" class="progress">
+                    <div class="progress-bar progress-bar-success"></div>
+                </div>
+                <!-- The container for the uploaded files -->
+                <div id="files" class="files"></div>
+                <br>
+
+            </div>
+    </div>
+</div>
+<script src="/public/jQuery-File-Upload-9.28.0/js/vendor/jquery.ui.widget.js"></script>
+<script src="/public/jQuery-File-Upload-9.28.0/js/jquery.iframe-transport.js"></script>
+<script src="/public/jQuery-File-Upload-9.28.0/js/jquery.fileupload.js"></script>
+
+<script>
+    $(function () {
+        'use strict';
+        $('#fileupload').fileupload({
+            url: "/admin/markdown-upload",
+            dataType: 'json',
+            add: function (e, data) {
+                let order_id = rnd(1,999999999)
+                data.files[0].order_id = order_id
+                let text = "<tr>" +
+                        "<td>"
+                            + data.files[0].name + "" +
+                        "</td>" +
+                        "<td id='" +order_id+ "'>" +
+                            "<div class='ui progress' id='" +order_id+ "'>" +
+                                "<div class='bar'>" +
+                                    "<div class='progress'></div>" +
+                                "</div>" +
+                            "</div>" +
+                        "</td>" +
+                        "</tr>"
+
+                $("#upload_list").append(text);
+                $('#' + order_id).progress({
+                    percent: 0
+                });
+                $("#batch_upload").click(function(){
+                    data.submit();
+                })
+            },
+            done: function (e, data) {
+                console.log(data.result)
+                let order_id = data.files[0].order_id
+                if (data.result.result == false){
+                    $('#' + order_id).html("<p>" + data.result.msg + "</p>");
+                }
+            },
+            progress:function(e,data){
+                let progress = parseInt(data.loaded / data.total * 100, 10);
+                let order_id = data.files[0].order_id
+                $('#' + order_id).progress({
+                    percent: progress
+                });
+            }
+        })
+    });
+
+    function rnd(start, end) {
+        return Math.floor(Math.random() * (end - start) + start);
+    }
+
+    $('.ui.dropdown').dropdown();
+</script>
+
+{{ template "admin.footer" .}}

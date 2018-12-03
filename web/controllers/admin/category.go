@@ -67,16 +67,29 @@ func CategoryUpdate(ctx *macaron.Context, f *session.Flash){
 }
 
 func CategoryDestroy(ctx *macaron.Context){
-	result := false
 	cid :=ctx.ParamsInt(":id")
-	err := service.CategoryDeleteById(cid)
-	if err == nil {
-		result = true
+	articles, err := service.ArticleByCategory(cid)
+
+	if len(articles) > 0 {
+		ctx.JSON(200, map[string]interface{}{
+			"success": false,
+			"message": "该分类下仍有文章，不能被删除",
+		})
+		return
 	}
 
+	err = service.CategoryDeleteById(cid)
+	if err != nil {
+		ctx.JSON(200, map[string]interface{}{
+			"success": false,
+		})
+		return
+	}
 	ctx.JSON(200, map[string]interface{}{
-		"success": result,
+		"success": true,
 	})
+	return
+
 }
 
 

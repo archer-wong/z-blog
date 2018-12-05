@@ -1,6 +1,7 @@
 package routers
 
 import (
+	"gopkg.in/macaron.v1"
 	"mime/multipart"
 	"z-blog/web/controllers"
 	"z-blog/web/controllers/admin"
@@ -14,7 +15,10 @@ type UploadForm struct {
 }
 func initRouter() {
 	//前台路由
-	m.Get("/", home.Index).Name("index")
+	m.Get("/", func(ctx *macaron.Context){
+		ctx.Redirect("article")
+	})
+	m.Get("/article", home.Index).Name("article_index")
 	m.Get("/article/:id:int", home.ArticleShow).Name("home.article_show")
 	m.Get("/category/:id:int", home.ArticlesByCategory).Name("home.articles_by_category")
 

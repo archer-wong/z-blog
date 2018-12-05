@@ -1,0 +1,26 @@
+{{define "home.pagination"}}
+<link type="text/css" rel="stylesheet" href="/public/css/simplePagination.css"/>
+        <div id="pagination">
+        </div>
+<script src="/public/js/jquery.simplePagination.js"></script>
+
+<script>
+    $(function() {
+        var total = "{{ .Total }}"
+        var page = "{{ .Page }}"
+        $("#pagination").pagination({
+            items: total,
+            itemsOnPage: 10,
+            currentPage: page,
+            cssStyle: 'light-theme',
+            onPageClick:function(pageNumber, event){
+                window.location.href = window.location.pathname +'?page=' + pageNumber;
+            },
+        });
+    });
+
+</script>
+
+
+
+{{end}}

@@ -10,6 +10,16 @@ func ArticleIndex() ([]model.Article, error){
 	return articles, err
 }
 
+func ArticlePage(page, limit int) ([]model.Article, int, error){
+	var articles, all []model.Article
+	var count int
+
+	model.Db.Find(&all).Count(&count)
+	err := model.Db.Order("created_at desc").Offset((page-1)*limit).Limit(limit).Find(&articles).Error
+
+	return articles, count, err
+}
+
 func ArticleStore(article model.Article) (model.Article ,error){
 	err := model.Db.Create(&article).Error
 
@@ -65,3 +75,12 @@ func ArticleByCategory(categoryId int) ([]model.Article, error){
 	return articles, err
 }
 
+func ArticleByCategoryPage(categoryId, page, limit int) ([]model.Article, int, error){
+	var articles, all []model.Article
+	var count int
+
+	model.Db.Find(&all).Count(&count)
+	err := model.Db.Where("category_id = ?", categoryId).Order("created_at desc").Offset((page-1)*limit).Limit(limit).Find(&articles).Count(&count).Error
+
+	return articles, count, err
+}

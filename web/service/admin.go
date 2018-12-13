@@ -1,4 +1,3 @@
-
 package service
 
 import (
@@ -6,7 +5,7 @@ import (
 	"z-blog/web/model"
 )
 
-func ValidateAccount(username, password string) (*model.Admin){
+func ValidateAccount(username, password string) *model.Admin {
 	user, _ := GetAdmin()
 	if user.Username == username && user.Password == helper.Encrypt(password) {
 		return user
@@ -20,7 +19,7 @@ func GetAdmin() (*model.Admin, error) {
 	return user, err
 }
 
-func AdminUpdate(admin, update model.Admin) error{
+func AdminUpdate(admin, update model.Admin) error {
 	err := model.Db.Model(&admin).Update(update).Error
 
 	return err

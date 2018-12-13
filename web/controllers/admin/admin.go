@@ -10,10 +10,9 @@ import (
 	"z-blog/web/service"
 )
 
-func Index(ctx *macaron.Context){
+func Index(ctx *macaron.Context) {
 	ctx.HTML(200, "admin/index")
 }
-
 
 func Login(ctx *macaron.Context) {
 	ctx.HTML(200, "admin/login")
@@ -30,7 +29,7 @@ func DoLogin(ctx *macaron.Context, cpt *captcha.Captcha, sess session.Store, fla
 		return
 	}
 
-	if len(captchaId) != 0 && !cpt.VerifyReq(ctx.Req){
+	if len(captchaId) != 0 && !cpt.VerifyReq(ctx.Req) {
 		flash.Error("验证码错误")
 		ctx.Redirect(ctx.URLFor("admin.login"), http.StatusFound)
 		return
@@ -79,7 +78,7 @@ func PasswordUpdate(ctx *macaron.Context, sess session.Store, f *session.Flash) 
 
 	encryptPassword := helper.Encrypt(newPassword)
 	admin := model.Admin{Username: username}
-	update := model.Admin{Password:encryptPassword}
+	update := model.Admin{Password: encryptPassword}
 	err := service.AdminUpdate(admin, update)
 
 	if err != nil {
@@ -91,4 +90,3 @@ func PasswordUpdate(ctx *macaron.Context, sess session.Store, f *session.Flash) 
 	f.Success("修改密码成功，请退出后重新登录")
 	ctx.Redirect("/admin")
 }
-

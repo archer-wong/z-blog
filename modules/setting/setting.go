@@ -1,10 +1,10 @@
 package setting
 
 import (
-"fmt"
-"gopkg.in/ini.v1"
-"gopkg.in/macaron.v1"
-"os"
+	"fmt"
+	"gopkg.in/ini.v1"
+	"gopkg.in/macaron.v1"
+	"os"
 )
 
 var (

@@ -7,7 +7,7 @@ import (
 	"z-blog/web/service"
 )
 
-func ArticleIndex(ctx *macaron.Context, f *session.Flash){
+func ArticleIndex(ctx *macaron.Context, f *session.Flash) {
 	articles, err := service.ArticleIndex()
 	if err != nil {
 		f.Error("获取文章列表失败")
@@ -16,7 +16,7 @@ func ArticleIndex(ctx *macaron.Context, f *session.Flash){
 	ctx.HTML(200, "admin/article/index")
 }
 
-func ArticleCreate(ctx *macaron.Context, f *session.Flash){
+func ArticleCreate(ctx *macaron.Context, f *session.Flash) {
 	categories, err := service.CategoryIndex()
 	if err != nil {
 		f.Error("获取分类列表失败")
@@ -25,13 +25,13 @@ func ArticleCreate(ctx *macaron.Context, f *session.Flash){
 	ctx.HTML(200, "admin/article/create")
 }
 
-func ArticleStore(ctx *macaron.Context, f *session.Flash){
+func ArticleStore(ctx *macaron.Context, f *session.Flash) {
 	title := ctx.QueryTrim("title")
 	content := ctx.QueryTrim("content")
 	tag := ctx.QueryTrim("tag")
 	categoryId := ctx.QueryInt("category_id")
 
-	article := model.Article{CategoryId:categoryId, Title:title, Content:content, Tag:tag}
+	article := model.Article{CategoryId: categoryId, Title: title, Content: content, Tag: tag}
 	_, err := service.ArticleStore(article)
 
 	if err != nil {
@@ -44,14 +44,14 @@ func ArticleStore(ctx *macaron.Context, f *session.Flash){
 	ctx.Redirect("/admin/article")
 }
 
-func ArticleEdit(ctx *macaron.Context, f *session.Flash){
+func ArticleEdit(ctx *macaron.Context, f *session.Flash) {
 	categories, err := service.CategoryIndex()
 	if err != nil {
 		f.Error("获取分类列表失败")
 	}
 	ctx.Data["Categories"] = categories
 
-	aid :=ctx.ParamsInt(":id")
+	aid := ctx.ParamsInt(":id")
 	article, err := service.ArticleById(aid)
 	ctx.Data["Article"] = article
 	if err != nil {
@@ -61,21 +61,21 @@ func ArticleEdit(ctx *macaron.Context, f *session.Flash){
 	ctx.HTML(200, "admin/article/edit")
 }
 
-func ArticleUpdate(ctx *macaron.Context, f *session.Flash){
-	aid :=ctx.ParamsInt(":id")
+func ArticleUpdate(ctx *macaron.Context, f *session.Flash) {
+	aid := ctx.ParamsInt(":id")
 	title := ctx.QueryTrim("title")
 	content := ctx.QueryTrim("content")
 	tag := ctx.QueryTrim("tag")
 	categoryId := ctx.QueryInt("category_id")
 
 	article := model.Article{Id: aid}
-	update := model.Article{CategoryId:categoryId, Title:title, Content:content, Tag:tag}
+	update := model.Article{CategoryId: categoryId, Title: title, Content: content, Tag: tag}
 
 	err := service.ArticleUpdate(article, update)
 	if err != nil {
-		idString :=ctx.Params(":id")
+		idString := ctx.Params(":id")
 		f.Error("修改文章[ " + title + " ]失败")
-		ctx.Redirect("/admin/article/"+ idString +"/edit")
+		ctx.Redirect("/admin/article/" + idString + "/edit")
 		return
 	}
 
@@ -83,9 +83,9 @@ func ArticleUpdate(ctx *macaron.Context, f *session.Flash){
 	ctx.Redirect("/admin/article")
 }
 
-func ArticleDestroy(ctx *macaron.Context){
+func ArticleDestroy(ctx *macaron.Context) {
 	result := false
-	cid :=ctx.ParamsInt(":id")
+	cid := ctx.ParamsInt(":id")
 	err := service.ArticleDeleteById(cid)
 	if err == nil {
 		result = true
@@ -95,5 +95,3 @@ func ArticleDestroy(ctx *macaron.Context){
 		"success": result,
 	})
 }
-
-

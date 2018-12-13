@@ -5,7 +5,7 @@ import (
 	"z-blog/web/service"
 )
 
-func Categories() []model.Category{
+func Categories() []model.Category {
 	categories, err := service.CategoryIndex()
 	if err != nil {
 		return nil
@@ -13,7 +13,7 @@ func Categories() []model.Category{
 	return categories
 }
 
-func TopArticles() []model.Article{
+func TopArticles() []model.Article {
 	articles, err := service.TopArticles()
 	if err != nil {
 		return nil
@@ -21,7 +21,7 @@ func TopArticles() []model.Article{
 	return articles
 }
 
-func Links() []model.Link{
+func Links() []model.Link {
 	links, err := service.LinkIndex()
 	if err != nil {
 		return nil
@@ -29,7 +29,7 @@ func Links() []model.Link{
 	return links
 }
 
-func Admin() *model.Admin{
+func Admin() *model.Admin {
 	admin, err := service.GetAdmin()
 	if err != nil {
 		return nil

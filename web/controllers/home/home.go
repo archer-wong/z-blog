@@ -8,11 +8,11 @@ import (
 	"z-blog/web/service"
 )
 
-func Index(ctx *macaron.Context){
+func Index(ctx *macaron.Context) {
 	page := ctx.QueryTrim("page")
-	pageInt, _ :=strconv.Atoi(page)
+	pageInt, _ := strconv.Atoi(page)
 	if pageInt == 0 {
-		pageInt =1
+		pageInt = 1
 	}
 
 	articles, count, _ := service.ArticlePage(pageInt, 10)
@@ -24,8 +24,8 @@ func Index(ctx *macaron.Context){
 	ctx.HTML(200, "home/index")
 }
 
-func ArticleShow(ctx *macaron.Context, sess session.Store){
-	aid :=ctx.ParamsInt(":id")
+func ArticleShow(ctx *macaron.Context, sess session.Store) {
+	aid := ctx.ParamsInt(":id")
 	article, _ := service.ArticleById(aid)
 	preArticle, _ := service.ArticlePre(aid)
 	nextArticle, _ := service.ArticleNext(aid)
@@ -33,7 +33,7 @@ func ArticleShow(ctx *macaron.Context, sess session.Store){
 	//阅读统计
 	if userId := sess.Get("userId"); userId == nil {
 		view := article.View + 1
-		update := model.Article{View:view}
+		update := model.Article{View: view}
 		service.ArticleUpdate(article, update)
 	}
 
@@ -44,15 +44,15 @@ func ArticleShow(ctx *macaron.Context, sess session.Store){
 	ctx.HTML(200, "home/article")
 }
 
-func ArticlesByCategory(ctx *macaron.Context){
-	cid :=ctx.ParamsInt(":id")
+func ArticlesByCategory(ctx *macaron.Context) {
+	cid := ctx.ParamsInt(":id")
 	page := ctx.QueryTrim("page")
-	pageInt, _ :=strconv.Atoi(page)
+	pageInt, _ := strconv.Atoi(page)
 	if pageInt == 0 {
-		pageInt =1
+		pageInt = 1
 	}
 
-	articles, count, _ := service.ArticleByCategoryPage(cid, pageInt,10)
+	articles, count, _ := service.ArticleByCategoryPage(cid, pageInt, 10)
 	category, _ := service.CategoryById(cid)
 
 	ctx.Data["Articles"] = articles
@@ -62,4 +62,3 @@ func ArticlesByCategory(ctx *macaron.Context){
 
 	ctx.HTML(200, "home/index")
 }
-

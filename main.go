@@ -1,10 +1,10 @@
 package main
 
 import (
-    "z-blog/routers"
+	"z-blog/routers"
 )
 
 func main() {
-    app := routers.New()
-    app.ListenAndServe()
+	app := routers.New()
+	app.ListenAndServe()
 }

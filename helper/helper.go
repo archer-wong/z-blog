@@ -37,6 +37,7 @@ var (
 	codes   = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 	codeLen = len(codes)
 )
+
 func RandStringBytes(len int) string {
 	data := make([]byte, len)
 	rand.Seed(time.Now().UnixNano())
@@ -48,4 +49,3 @@ func RandStringBytes(len int) string {
 
 	return string(data)
 }
-

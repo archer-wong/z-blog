@@ -7,7 +7,7 @@ import (
 	"z-blog/web/service"
 )
 
-func CategoryIndex(ctx *macaron.Context, f *session.Flash){
+func CategoryIndex(ctx *macaron.Context, f *session.Flash) {
 	categories, err := service.CategoryIndex()
 	if err != nil {
 		f.Error("获取分类列表失败")
@@ -16,14 +16,14 @@ func CategoryIndex(ctx *macaron.Context, f *session.Flash){
 	ctx.HTML(200, "admin/category/index")
 }
 
-func CategoryCreate(ctx *macaron.Context){
+func CategoryCreate(ctx *macaron.Context) {
 	ctx.HTML(200, "admin/category/create")
 }
 
-func CategoryStore(ctx *macaron.Context, f *session.Flash){
+func CategoryStore(ctx *macaron.Context, f *session.Flash) {
 	title := ctx.QueryTrim("title")
 
-	category := model.Category{Title:title}
+	category := model.Category{Title: title}
 	err := service.CategoryStore(category)
 
 	if err != nil {
@@ -36,8 +36,8 @@ func CategoryStore(ctx *macaron.Context, f *session.Flash){
 	ctx.Redirect("/admin/category")
 }
 
-func CategoryEdit(ctx *macaron.Context, f *session.Flash){
-	cid :=ctx.ParamsInt(":id")
+func CategoryEdit(ctx *macaron.Context, f *session.Flash) {
+	cid := ctx.ParamsInt(":id")
 	category, err := service.CategoryById(cid)
 	ctx.Data["Category"] = category
 	if err != nil {
@@ -47,18 +47,18 @@ func CategoryEdit(ctx *macaron.Context, f *session.Flash){
 	ctx.HTML(200, "admin/category/edit")
 }
 
-func CategoryUpdate(ctx *macaron.Context, f *session.Flash){
-	cid :=ctx.ParamsInt(":id")
+func CategoryUpdate(ctx *macaron.Context, f *session.Flash) {
+	cid := ctx.ParamsInt(":id")
 	title := ctx.QueryTrim("title")
 
 	category := model.Category{Id: cid}
-	update := model.Category{Title:title}
+	update := model.Category{Title: title}
 	err := service.CategoryUpdate(category, update)
 
 	if err != nil {
-		idString :=ctx.Params(":id")
+		idString := ctx.Params(":id")
 		f.Error("修改分类[ " + title + " ]失败")
-		ctx.Redirect("/admin/category/"+ idString +"/edit")
+		ctx.Redirect("/admin/category/" + idString + "/edit")
 		return
 	}
 
@@ -66,8 +66,8 @@ func CategoryUpdate(ctx *macaron.Context, f *session.Flash){
 	ctx.Redirect("/admin/category")
 }
 
-func CategoryDestroy(ctx *macaron.Context){
-	cid :=ctx.ParamsInt(":id")
+func CategoryDestroy(ctx *macaron.Context) {
+	cid := ctx.ParamsInt(":id")
 	articles, err := service.ArticleByCategory(cid)
 
 	if len(articles) > 0 {
@@ -91,5 +91,3 @@ func CategoryDestroy(ctx *macaron.Context){
 	return
 
 }
-
-

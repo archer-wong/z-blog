@@ -13,9 +13,10 @@ type UploadForm struct {
 	Title      string                `form:"title"`
 	TextUpload *multipart.FileHeader `form:"txtUpload"`
 }
+
 func initRouter() {
 	//前台路由
-	m.Get("/", func(ctx *macaron.Context){
+	m.Get("/", func(ctx *macaron.Context) {
 		ctx.Redirect("article")
 	})
 	m.Get("/article", home.Index).Name("article_index")
@@ -63,7 +64,6 @@ func initRouter() {
 		m.Post("/markdown/publish", admin.MarkdownPublish).Name("admin.markdown_publish")
 
 	}, middlewares.AuthPermission)
-
 
 	m.NotFound(controllers.NotFound)
 }

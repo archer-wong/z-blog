@@ -56,21 +56,21 @@ func initCaptcha() {
 	m.Use(cache.Cacher())
 	m.Use(captcha.Captchaer(captcha.Options{
 		// 获取验证码图片的 URL 前缀，默认为 "/captcha/"
-		URLPrefix:            "/captcha/",
+		URLPrefix: "/captcha/",
 		// 表单隐藏元素的 ID 名称，默认为 "captcha_id"
-		FieldIdName:        "captcha_id",
+		FieldIdName: "captcha_id",
 		// 用户输入验证码值的元素 ID，默认为 "captcha"
-		FieldCaptchaName:    "captcha",
+		FieldCaptchaName: "captcha",
 		// 验证字符的个数，默认为 6
-		ChallengeNums:        4,
+		ChallengeNums: 4,
 		// 验证码图片的宽度，默认为 240 像素
-		Width:                80,
+		Width: 80,
 		// 验证码图片的高度，默认为 80 像素
-		Height:                35,
+		Height: 35,
 		// 验证码过期时间，默认为 600 秒
-		Expiration:            600,
+		Expiration: 600,
 		// 用于存储验证码正确值的 Cache 键名，默认为 "captcha_"
-		CachePrefix:        "captcha_",
+		CachePrefix: "captcha_",
 	}))
 }
 
@@ -103,13 +103,13 @@ func initTmpl() {
 			"AppVer": func() string {
 				return "1.0.0"
 			},
-			"URL": m.URLFor,
-			"DateTime": helper.DateTime,
-			"SubString": helper.SubString,
-			"Categories": controllers.Categories,
+			"URL":         m.URLFor,
+			"DateTime":    helper.DateTime,
+			"SubString":   helper.SubString,
+			"Categories":  controllers.Categories,
 			"TopArticles": controllers.TopArticles,
-			"Links": controllers.Links,
-			"Admin": controllers.Admin,
+			"Links":       controllers.Links,
+			"Admin":       controllers.Admin,
 			"Breadcrumb": func(first, second string) []string {
 				values := []string{first, second}
 				return values

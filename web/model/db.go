@@ -11,7 +11,7 @@ import (
 
 var Db *gorm.DB
 
-func init(){
+func init() {
 	sec := setting.Cfg.Section("database")
 
 	var err error
@@ -31,7 +31,11 @@ func init(){
 		panic("failed to connect database")
 	}
 
-	Db.LogMode(true)
+	env := setting.Cfg.Section("app").Key("ENV").String()
+	if env == "debug" {
+		Db.LogMode(true)
+	}
+
 	Db.AutoMigrate(new(Admin), new(Category), new(Article), new(Link), new(Markdown))
 
 	initAdmin()
@@ -40,7 +44,7 @@ func init(){
 func initAdmin() {
 	user := new(Admin)
 	err := Db.First(user).Error
-	if  err != nil {
+	if err != nil {
 		username := setting.Cfg.Section("admin").Key("USERNAME").String()
 		password := setting.Cfg.Section("admin").Key("PASSWORD").String()
 		admin := new(Admin)

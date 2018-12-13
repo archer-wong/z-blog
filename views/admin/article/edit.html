@@ -63,7 +63,6 @@
 <script src="/public/editor.md-master/editormd.js"></script>
 
 <script type="text/javascript">
-
     var zEditor;
     $(function() {
         zEditor = editormd("editormd", {
@@ -71,6 +70,9 @@
             height  : 640,
             syncScrolling : "single",
             path    : "/public/editor.md-master/lib/",
+            imageUpload: true,
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL: "/admin/qiniu",
             onload : function() {
                 //console.log('onload', this);
             },
@@ -82,9 +84,107 @@
                 $("#editormd").css("z-index", "")
             },
         });
-
     });
 
+    //监听剪切板图片上传
+    document.addEventListener("paste", function (e) {
+        if ( !(e.clipboardData && e.clipboardData.items) ) {
+            return ;
+        }
+
+        for (var i = 0, len = e.clipboardData.items.length; i < len; i++) {
+            var item = e.clipboardData.items[i];
+            if (item.kind === "string") {
+                item.getAsString(function (str) {
+                    // str 是获取到的字符串
+                    //console.log(str)
+                })
+            } else if (item.kind === "file") {
+                var pasteFile = item.getAsFile();
+                // pasteFile就是获取到的文件
+
+                var formData = new FormData();
+                formData.append('editormd-image-file', pasteFile);
+
+                // 其他些参数，例如用户id
+                // ajax上传
+                var xhr = new XMLHttpRequest();
+                // 上传结束
+                xhr.onload = function () {
+                    // ... 这里处理返回的json数据
+                    var json = JSON.parse(xhr.responseText);
+                    if (json.success == 1) {
+                        zEditor.insertValue("\n![](" + json.url + ")");
+                    } else {
+                        console.log(json.message)
+                    }
+                };
+                xhr.open('POST', '/admin/qiniu', true);
+                xhr.send(formData);
+            }
+        }
+
+    })
+
+    //拖拽上传图片
+    if (typeof(Worker) !== "undefined") {
+        // 浏览器支持HTML5
+        console.log("support html5")
+    } else {
+        console.log("not support html5")
+        // 浏览器不支持HTML5
+    }
+    $(document).on({
+        dragleave:function(e){      //拖离
+            e.preventDefault();
+        },
+        drop:function(e){           //拖后放
+            e.preventDefault();
+        },
+        dragenter:function(e){      //拖进
+            e.preventDefault();
+        },
+        dragover:function(e){       //拖来拖去
+            e.preventDefault();
+        }
+    });
+    var box = document.getElementById('editormd'); //拖拽区域
+    box.addEventListener("drop",
+            function(e) {
+                e.preventDefault(); //取消默认浏览器拖拽效果
+                var fileList = e.dataTransfer.files; //获取文件对象
+                //检测是否是拖拽文件到页面的操作
+                if (fileList.length == 0) {
+                    return false;
+                }
+                //检测文件是不是图片
+                if (fileList[0].type.indexOf('image') === -1) {
+                    console.log("您拖的不是图片！");
+                    return false;
+                }
+
+                var formData = new FormData();
+                formData.append('editormd-image-file', fileList[0]);
+
+                // ajax上传
+                var xhr = new XMLHttpRequest();
+                // 上传结束
+                xhr.onload = function () {
+                    var json = JSON.parse(xhr.responseText);
+                    // ... 这里处理返回的json数据
+                    if (json.success == 1) {
+                        zEditor.insertValue("\n![](" + json.url + ")");
+                    } else {
+                        console.log(json.message)
+                    }
+                };
+                xhr.open('POST', '/admin/qiniu', true);
+                xhr.send(formData);
+
+            },
+            false);
+
+    //下拉菜单
     $('.ui.dropdown').dropdown();
 </script>
 

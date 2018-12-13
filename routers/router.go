@@ -63,6 +63,9 @@ func initRouter() {
 		m.Delete("/markdown/:id:int", admin.MarkdownDestroy).Name("admin.markdown_destroy")
 		m.Post("/markdown/publish", admin.MarkdownPublish).Name("admin.markdown_publish")
 
+		//七牛
+		m.Post("/qiniu", admin.QiniuUpload).Name("admin.qiniu_upload")
+
 	}, middlewares.AuthPermission)
 
 	m.NotFound(controllers.NotFound)

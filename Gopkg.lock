@@ -10,6 +10,14 @@
   version = "v2"
 
 [[projects]]
+  digest = "1:b3af453d2bd5c7f1c6242b38d0416aa6cf96485a90b404fe638abeadb7ddd501"
+  name = "github.com/disintegration/gift"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "e7b6d79ff1929f7f71e2de01198850f4e50db244"
+  version = "v1.2.0"
+
+[[projects]]
   branch = "master"
   digest = "1:2e2b2c8b2803b8d62aa8eb58285de5e7039ae603999f70bfe6ffc83a6779aa0c"
   name = "github.com/go-macaron/cache"
@@ -50,9 +58,28 @@
   revision = "068d408f9c54c7fa7fcc5e2bdd3241ab21280c9e"
 
 [[projects]]
-  digest = "1:235ae01f32fb5f12c5f6d2e0e05ab48e651ab31c126e45a4efc4f510810941ac"
-  name = "github.com/jinzhu/gorm"
+  digest = "1:ec6f9bf5e274c833c911923c9193867f3f18788c461f76f05f62bb1510e0ae65"
+  name = "github.com/go-sql-driver/mysql"
   packages = ["."]
+  pruneopts = "UT"
+  revision = "72cd26f257d44c1114970e19afddcd812016007e"
+  version = "v1.4.1"
+
+[[projects]]
+  digest = "1:97df918963298c287643883209a2c3f642e6593379f97ab400c2a2e219ab647d"
+  name = "github.com/golang/protobuf"
+  packages = ["proto"]
+  pruneopts = "UT"
+  revision = "aa810b61a9c79d51363740d207bb46cf8e620ed5"
+  version = "v1.2.0"
+
+[[projects]]
+  digest = "1:b6f4477f09f11785097a121811f3a90d8d26cab73c1aa71abda859bdf6ad2334"
+  name = "github.com/jinzhu/gorm"
+  packages = [
+    ".",
+    "dialects/mysql",
+  ]
   pruneopts = "UT"
   revision = "6ed508ec6a4ecb3531899a69cbc746ccf65a4166"
   version = "v1.9.1"
@@ -85,12 +112,68 @@
   version = "v1.2.0"
 
 [[projects]]
+  digest = "1:6dbe890cc71e1d2a47c805d1d516079c410ba141afd924d19947a2d8aee5e8d8"
+  name = "github.com/qiniu/api.v7"
+  packages = [
+    ".",
+    "auth/qbox",
+    "cdn",
+    "conf",
+    "rtc",
+    "storage",
+  ]
+  pruneopts = "UT"
+  revision = "bc6998c1186aafa0eadc6396d28fc7e77a594a2a"
+  version = "v7.2.5"
+
+[[projects]]
+  digest = "1:2aab414b381b52e8a3fd14ad9f9be657680a90df2699ca15861efe0eddbf040a"
+  name = "github.com/qiniu/x"
+  packages = [
+    "bytes.v7",
+    "bytes.v7/seekable",
+    "reqid.v7",
+    "xlog.v7",
+  ]
+  pruneopts = "UT"
+  revision = "946c4a16076d6d98aeb78619e2bd4012357f7228"
+  version = "v7.0.8"
+
+[[projects]]
   branch = "master"
   digest = "1:f92f6956e4059f6a3efc14924d2dd58ba90da25cc57fe07ae3779ef2f5e0c5f2"
   name = "golang.org/x/crypto"
   packages = ["pbkdf2"]
   pruneopts = "UT"
   revision = "3d3f9f413869b949e48070b5bc593aa22cc2b8f2"
+
+[[projects]]
+  branch = "master"
+  digest = "1:76ee51c3f468493aff39dbacc401e8831fbb765104cbf613b89bef01cf4bad70"
+  name = "golang.org/x/net"
+  packages = ["context"]
+  pruneopts = "UT"
+  revision = "610586996380ceef02dd726cc09df7e00a3f8e56"
+
+[[projects]]
+  digest = "1:80956fa683c0597cfa8d4d0f815c4e1d1c7be635b0568c3fb6a607b4bfbcc0b5"
+  name = "google.golang.org/appengine"
+  packages = [
+    ".",
+    "cloudsql",
+    "internal",
+    "internal/app_identity",
+    "internal/base",
+    "internal/datastore",
+    "internal/log",
+    "internal/memcache",
+    "internal/modules",
+    "internal/remote_api",
+    "memcache",
+  ]
+  pruneopts = "UT"
+  revision = "4a4468ece617fc8205e99368fa2200e9d1fad421"
+  version = "v1.3.0"
 
 [[projects]]
   digest = "1:15e27372d379b45b18ac917b9dafc45c45485239490ece18cca97a12f9591146"
@@ -108,15 +191,33 @@
   revision = "c1be95e6d21e769e44e1ec33cec9da5837861c10"
   version = "v1.3.1"
 
+[[projects]]
+  digest = "1:3b5e7235c98bd161d63467d2dde26c630d598b123e4a1ed810f9026c60c7b6c8"
+  name = "qiniupkg.com/x"
+  packages = [
+    "bytes.v7",
+    "log.v7",
+    "reqid.v7",
+  ]
+  pruneopts = "UT"
+  revision = "946c4a16076d6d98aeb78619e2bd4012357f7228"
+  version = "v7.0.8"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/disintegration/gift",
     "github.com/go-macaron/cache",
     "github.com/go-macaron/captcha",
     "github.com/go-macaron/gzip",
     "github.com/go-macaron/session",
     "github.com/jinzhu/gorm",
+    "github.com/jinzhu/gorm/dialects/mysql",
+    "github.com/qiniu/api.v7",
+    "golang.org/x/net/context",
+    "google.golang.org/appengine",
+    "google.golang.org/appengine/memcache",
     "gopkg.in/ini.v1",
     "gopkg.in/macaron.v1",
   ]

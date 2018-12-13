@@ -48,3 +48,7 @@
 [[constraint]]
   name = "github.com/jinzhu/gorm"
   version = "1.9.1"
+
+[[constraint]]
+  name = "github.com/qiniu/api.v7"
+  version = "7.2.5"

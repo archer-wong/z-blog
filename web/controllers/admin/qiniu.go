@@ -49,7 +49,7 @@ func QiniuUpload(ctx *macaron.Context) {
 	domain := sec.Key("DOMAIN").String()
 
 	putPolicy := storage.PutPolicy{
-		Scope:               bucket,
+		Scope: bucket,
 	}
 	mac := qbox.NewMac(accessKey, secretKey)
 
@@ -95,9 +95,7 @@ func QiniuUpload(ctx *macaron.Context) {
 	ctx.JSON(200, map[string]interface{}{
 		"success": 1,
 		"message": "上传图片到服务器成功！",
-		//"url": "http://markdown.archerwong.cn/" + fileName,
-		"url": domain + ret.Key,
+		"url":     domain + ret.Key,
 	})
 
 }
-

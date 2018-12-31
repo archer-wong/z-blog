@@ -109,6 +109,7 @@ func initTmpl() {
 			"Categories":  controllers.Categories,
 			"TopArticles": controllers.TopArticles,
 			"Links":       controllers.Links,
+			"Blog":        controllers.Blog,
 			"Admin":       controllers.Admin,
 			"Breadcrumb": func(first, second string) []string {
 				values := []string{first, second}

@@ -1,28 +1,17 @@
-{{ template "home.header" .}}
 
-<div class="main-container">
-    <div class="ui grid main-box">
-        <div class="thirteen wide column left-main">
-            {{if .Category }}
-                <div class="bloglist">
-                   <h2>随笔分类 - {{ .Category.Title }}</h2>
-                </div>
-            {{end}}
-            {{range .Articles}}
-                <div class="bloglist">
-                    <h2><a href="/article/{{ .Id }}" title="<font color='1FADFF'>{{ .Title }}</font>"><font color="1FADFF">{{ .Title }}</font></a></h2>
-                    <p>{{  .Content  }}</p>
-                </div>
-            {{end}}
-
-            {{ template "home.pagination" .}}
+{{define "home.main"}}
+    {{if .Category }}
+        <div class="bloglist">
+            <h2>随笔分类 - {{ .Category.Title }}</h2>
         </div>
-
-        <div class="three wide column right-main">
-            {{ template "home.right_list_box" .}}
+    {{end}}
+    {{range .Articles}}
+        <div class="bloglist">
+            <h2><a href="/article/{{ .Id }}" title="<font color='1FADFF'>{{ .Title }}</font>"><font color="1FADFF">{{ .Title }}</font></a></h2>
+            <p>{{  .Content  }}</p>
         </div>
+    {{end}}
 
-    </div>
-</div>
+    {{ template "home.pagination" .}}
+{{end}}
 
-{{ template "home.footer" .}}

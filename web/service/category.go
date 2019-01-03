@@ -6,7 +6,7 @@ import (
 
 func CategoryIndex() ([]model.Category, error) {
 	var categories []model.Category
-	err := model.Db.Order("created_at desc").Find(&categories).Error
+	err := model.Db.Order("title asc").Find(&categories).Error
 
 	return categories, err
 }

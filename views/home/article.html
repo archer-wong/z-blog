@@ -1,8 +1,8 @@
 
 {{define "home.header"}}
-    <title>{{ .Article.Category.Title }}-{{ .Article.Title }}-{{ Blog.Name }}</title>
-    <meta name="description" content="本博客专注于PHP,PYTHON,GOLANG,MYSQL,CSS,JAVASCRIPT等相关领域的分享学习，欢迎一起学习讨论，共同进步。">
+    <title>{{ .Article.Title }}-{{ .Article.Category.Title }}-{{ Blog.Name }}</title>
     <meta name="keywords" content="{{ .Article.Tag}}">
+
     <link rel="stylesheet" href="/public/editor.md-master/examples/css/style.css" />
     <link rel="stylesheet" href="/public/editor.md-master/css/editormd.css" />
 {{end}}
